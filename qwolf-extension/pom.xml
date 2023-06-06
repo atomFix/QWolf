@@ -7,14 +7,20 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>qwolf-core</artifactId>
+    <artifactId>qwolf-extension</artifactId>
+    <packaging>pom</packaging>
 
-    <name>qwolf-core</name>
+    <name>qwolf-extension</name>
+
+    <modules>
+        <module>qwolf-extension-filter</module>
+    </modules>
 
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>com.quick</groupId>
+            <artifactId>qwolf-core</artifactId>
         </dependency>
     </dependencies>
+
 </project>

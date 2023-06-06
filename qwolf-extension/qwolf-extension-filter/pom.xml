@@ -3,18 +3,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.quick</groupId>
-        <artifactId>QWolf</artifactId>
+        <artifactId>qwolf-extension</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>qwolf-core</artifactId>
+    <artifactId>qwolf-extension-filter</artifactId>
+    <packaging>jar</packaging>
 
-    <name>qwolf-core</name>
+    <name>qwolf-extension-filter</name>
+
 
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
