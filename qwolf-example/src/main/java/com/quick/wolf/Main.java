@@ -1,5 +1,6 @@
 package com.quick.wolf;
 
+import com.quick.wolf.config.MethodConfig;
 import com.quick.wolf.config.Provider;
 import com.quick.wolf.core.extension.ExtensionLoader;
 

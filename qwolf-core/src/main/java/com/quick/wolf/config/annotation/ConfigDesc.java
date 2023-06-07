@@ -16,4 +16,5 @@ public @interface ConfigDesc {
 
     boolean excluded() default false;
 
+    boolean required() default false;
 }

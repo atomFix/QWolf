@@ -1,12 +1,15 @@
 package com.quick.wolf.config;
 
 import com.google.common.base.Strings;
+import com.quick.wolf.common.WolfConstants;
 import com.quick.wolf.config.annotation.ConfigDesc;
+import com.quick.wolf.exception.WolfFrameworkException;
+import com.quick.wolf.utils.StringUtils;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.List;
 import java.util.Map;
 
 
@@ -36,6 +39,17 @@ public abstract class AbstractConfig implements Serializable {
         }
     }
 
+    public static void collectMethodConfigParams(Map<String, String> parameters, List<MethodConfig> methodConfigs) {
+        if (methodConfigs == null || methodConfigs.isEmpty()) {
+            return;
+        }
+        for (MethodConfig mc : methodConfigs) {
+            if (mc != null) {
+                mc.appendConfigParams(parameters, StringUtils.join(WolfConstants.METHOD_CONFIG_PREFIX, mc.getName(), "(", mc.getArgumentTypes(), ")"));
+            }
+        }
+    }
+
     protected void appendConfigParams(Map<String, String> parameters) {
         appendConfigParams(parameters, null);
     }
@@ -54,6 +68,12 @@ public abstract class AbstractConfig implements Serializable {
                         key = configDesc.key();
                     }
                     Object value = method.invoke(this);
+                    if (value == null ||  Strings.isNullOrEmpty((String) value)) {
+                        if (configDesc != null && configDesc.required()) {
+                            throw new WolfFrameworkException("config Desc require is true, but the value is null ! the key is : " + key);
+                        }
+                        continue;
+                    }
                     parameters.put(wrapKeyPrefix(prefix, key), String.valueOf(value).trim());
                 } else if (isParamsMethod(method)){
                     Map<String, String> map = (Map<String, String>) method.invoke(this);
@@ -63,7 +83,7 @@ public abstract class AbstractConfig implements Serializable {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new WolfFrameworkException(e.getMessage());
         }
     }
 
