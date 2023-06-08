@@ -1,5 +1,7 @@
 package com.quick.wolf.config;
 
+import com.quick.wolf.rpc.Provider;
+
 /**
  * @Description:
  * @author: liukairong1

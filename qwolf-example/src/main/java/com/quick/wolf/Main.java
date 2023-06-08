@@ -1,7 +1,6 @@
 package com.quick.wolf;
 
-import com.quick.wolf.config.MethodConfig;
-import com.quick.wolf.config.Provider;
+import com.quick.wolf.rpc.Provider;
 import com.quick.wolf.core.extension.ExtensionLoader;
 
 import java.util.List;

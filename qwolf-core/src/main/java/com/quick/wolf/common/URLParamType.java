@@ -86,6 +86,7 @@ public enum URLParamType {
      * codec
      **/
     codec("codec", "wolf"),
+    protocol("protocol", WolfConstants.PROTOCOL_WOLF),
     /**
      * endpointFactory
      **/
@@ -106,6 +107,7 @@ public enum URLParamType {
     module("module", WolfConstants.APPLICATION_NAME),
     clientGroup("clientGroup", "default_rpc"),
     accessLog("accessLog", false),
+    nodeType("nodeType", WolfConstants.NODE_TYPE_SERVICE),
 
     // 0为不做并发限制
     actives("actives", 0),

@@ -1,4 +1,4 @@
-package com.quick.wolf.config;
+package com.quick.wolf.rpc;
 
 import com.quick.wolf.core.extension.Scope;
 import com.quick.wolf.core.extension.Spi;

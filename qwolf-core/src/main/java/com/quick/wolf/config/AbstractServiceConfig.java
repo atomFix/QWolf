@@ -5,20 +5,20 @@ package com.quick.wolf.config;
  * @author: liukairong1
  * @date: 2023/06/07/09:43
  */
-public abstract class AbstractServiceConfig extends AbstractConfig {
+public abstract class AbstractServiceConfig extends AbstractInterfaceConfig {
 
     private static final long serialVersionUID = -6195423458485631662L;
     /**
      * one service : n protocol , every protocol can user self port, for example:
      * protocol:port,protocol:port,protocol:port
      */
-    private String export;
+    protected String export;
 
     /**
      * auto set value, but if you have more than one ip, you want to use one of these ip
      * you can set an ip to use
      */
-    private String host;
+    protected String host;
 
     public String getExport() {
         return export;

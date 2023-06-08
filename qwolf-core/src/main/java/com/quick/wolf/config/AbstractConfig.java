@@ -68,7 +68,7 @@ public abstract class AbstractConfig implements Serializable {
                         key = configDesc.key();
                     }
                     Object value = method.invoke(this);
-                    if (value == null ||  Strings.isNullOrEmpty((String) value)) {
+                    if (value == null ||  Strings.isNullOrEmpty(String.valueOf(value))) {
                         if (configDesc != null && configDesc.required()) {
                             throw new WolfFrameworkException("config Desc require is true, but the value is null ! the key is : " + key);
                         }
