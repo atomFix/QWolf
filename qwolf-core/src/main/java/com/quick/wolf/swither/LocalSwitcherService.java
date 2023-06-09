@@ -1,5 +1,7 @@
 package com.quick.wolf.swither;
 
+import com.quick.wolf.core.extension.SpiMeta;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,7 @@ import java.util.List;
  * @author: liukairong1
  * @date: 2023/06/09/20:34
  */
+@SpiMeta(name = "localSwitcherService")
 public class LocalSwitcherService implements SwitcherService {
 
 
