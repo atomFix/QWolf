@@ -1,8 +1,12 @@
 package com.quick.wolf.swither;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.quick.wolf.core.extension.SpiMeta;
 
+import java.util.AbstractList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -12,25 +16,29 @@ import java.util.List;
 @SpiMeta(name = "localSwitcherService")
 public class LocalSwitcherService implements SwitcherService {
 
+    private static Map<String, Switcher> switcherMap = Maps.newConcurrentMap();
+
+    private Map<String, List<SwitcherListener>> listMap = Maps.newConcurrentMap();
 
     @Override
     public Switcher getSwitcher(String name) {
-        return null;
+        return switcherMap.get(name);
     }
 
     @Override
     public List<Switcher> getAllSwitcher() {
-        return null;
+        return Lists.newArrayList(switcherMap.values());
     }
 
     @Override
     public void initSwitcher(String name, boolean initialValue) {
-
+        setValue(name, initialValue);
     }
 
     @Override
     public boolean isOpen(String name) {
-        return false;
+        Switcher switcher = switcherMap.get(name);
+        return switcher != null && switcher.isOn();
     }
 
     @Override
