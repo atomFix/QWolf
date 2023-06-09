@@ -15,6 +15,6 @@ public interface Node {
 
     String desc();
 
-
+    URL getUrl();
 
 }

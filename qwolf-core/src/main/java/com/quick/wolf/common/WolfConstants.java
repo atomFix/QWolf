@@ -24,6 +24,8 @@ public class WolfConstants {
 
     public static final String COMMA_SEPARATOR = ",";
 
+    public static final String DISABLE_FILTER_PREFIX = "-";
+
     public static final String PARAM_SEPARATOR = ":";
     public static final String QUERY_PARAM_SEPARATOR = "&";
 
@@ -35,4 +37,14 @@ public class WolfConstants {
 
     public static final String NODE_TYPE_SERVICE = "service";
     public static final String NODE_TYPE_REFERER = "referer";
+
+    public static final String ENV_WOLF_IP_PREFIX = "WOLF_IP_PREFIX";
+
+    /**
+     * wolf service 追加导出分组。例如可以自动追加云平台上的分组
+     */
+    public static final String ENV_ADDITIONAL_GROUP = "WOLF_SERVICE_ADDITIONAL_GROUP";
+
+    public static final String STR_DEFAULT_VALUE = "default";
+
 }

@@ -2,9 +2,11 @@ package com.quick.wolf.config;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.quick.wolf.exception.WolfException;
+import com.quick.wolf.exception.WolfServiceException;
 import com.quick.wolf.rpc.URL;
+import com.quick.wolf.utils.NetUtils;
 
+import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,6 @@ import java.util.Map;
  * @date: 2023/06/08/09:28
  */
 public abstract class AbstractInterfaceConfig extends AbstractConfig {
-
 
     private static final long serialVersionUID = 8539708792446376754L;
 
@@ -69,6 +70,8 @@ public abstract class AbstractInterfaceConfig extends AbstractConfig {
     protected Integer slowThreshold;
 
     protected Integer connectTimeout;
+
+    protected ExtConfig extConfig;
 
     public List<ProtocolConfig> getProtocolConfigs() {
         return protocolConfigs;
@@ -265,7 +268,14 @@ public abstract class AbstractInterfaceConfig extends AbstractConfig {
         for (URL url : registerUrls) {
             registerHostPorts.put(url.getHost(), url.getPort());
         }
-
+        InetAddress address = NetUtils.getLocalAddress(registerHostPorts);
+        if (address != null) {
+            localAddress = address.getHostAddress();
+        }
+        if (NetUtils.isValidLocalHost(localAddress)) {
+            return localAddress;
+        }
+        throw new WolfServiceException("service get local host result is empty!");
     }
 
 }
