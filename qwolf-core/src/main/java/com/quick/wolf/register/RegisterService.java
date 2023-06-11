@@ -15,7 +15,7 @@ public interface RegisterService {
 
     void unregister(URL url);
 
-    void avaliable(URL url);
+    void available(URL url);
 
     void unAvaliable(URL url);
 

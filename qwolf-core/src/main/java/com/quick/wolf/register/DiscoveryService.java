@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface DiscoveryService {
 
-    void subscibe(URL url, NotifyListener listener);
+    void subscribe(URL url, NotifyListener listener);
 
     void unsubscibe(URL url, NotifyListener listener);
 

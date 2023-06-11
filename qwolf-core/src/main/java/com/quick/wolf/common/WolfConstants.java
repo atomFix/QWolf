@@ -47,4 +47,6 @@ public class WolfConstants {
 
     public static final String STR_DEFAULT_VALUE = "default";
 
+    public static final String REGISTRY_HEARTBEAT_SWITCHER = "feature.config.server.heartbeat";
+
 }
