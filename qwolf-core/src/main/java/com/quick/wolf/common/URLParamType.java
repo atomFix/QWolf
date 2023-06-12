@@ -163,7 +163,7 @@ public enum URLParamType {
     mixGroups("mixGroups", ""),//配置要进行混打的分组
 
     // 消息处理分发策略
-    providerProtectedStrategy("providerProtectedStrategy", "motan"),
+    providerProtectedStrategy("providerProtectedStrategy", "wolf"),
 
     // mesh registry
     dynamic("dynamic", false), // mesh registry 是否开启动态订阅、注册能力。需要mesh同时支持动态功能

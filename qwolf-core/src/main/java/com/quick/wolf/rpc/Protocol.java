@@ -16,4 +16,13 @@ public interface Protocol {
 
     <T> Exporter<T> export(Provider<T> provider, URL url);
 
+
+    /**
+     * <pre>
+     * 		1） exporter destroy
+     * 		2） referer destroy
+     * </pre>
+     *
+     */
+    void destroy();
 }

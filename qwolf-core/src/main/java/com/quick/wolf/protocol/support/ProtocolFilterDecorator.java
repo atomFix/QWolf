@@ -7,9 +7,7 @@ import com.quick.wolf.common.WolfConstants;
 import com.quick.wolf.core.extension.ActivationComparator;
 import com.quick.wolf.core.extension.ExtensionLoader;
 import com.quick.wolf.core.extension.SpiMeta;
-import com.quick.wolf.exception.WolfErrorMsgConstant;
 import com.quick.wolf.exception.WolfFrameworkException;
-import com.quick.wolf.exception.WolfServiceException;
 import com.quick.wolf.filter.Filter;
 import com.quick.wolf.filter.InitializableFilter;
 import com.quick.wolf.rpc.*;
@@ -83,8 +81,8 @@ public class ProtocolFilterDecorator implements Protocol {
                 }
 
                 @Override
-                public void destory() {
-                    finalProvider.destory();
+                public void destroy() {
+                    finalProvider.destroy();
                 }
 
                 @Override

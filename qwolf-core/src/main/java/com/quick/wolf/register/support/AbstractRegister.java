@@ -21,6 +21,9 @@ import java.util.*;
 @Slf4j
 public abstract class AbstractRegister implements Register {
 
+    /**
+     * the first key is register URL, the first value type is a map, the map key is 'nodeType value'(for example, services...), the value is register center services URL
+     */
     private static final Map<URL, Map<String, List<URL>>> subscribedCategoryResponse = Maps.newConcurrentMap();
 
     private URL registerUrl;
@@ -130,10 +133,65 @@ public abstract class AbstractRegister implements Register {
         }
         url = url.copy();
         List<URL> urls = Lists.newArrayList();
-        subscribedCategoryResponse.
+        Map<String, List<URL>> discoverMap = subscribedCategoryResponse.get(url);
+        if (discoverMap != null && !discoverMap.isEmpty()) {
+            for (List<URL> value : discoverMap.values()) {
+                for (URL registerUrl : value) {
+                    urls.add(registerUrl.copy());
+                }
+            }
+        } else {
+            List<URL> urlDiscovered = doDiscover(url);
+            for (URL registerUrl : urlDiscovered) {
+                urls.add(registerUrl.copy());
+            }
+        }
 
+        return urls;
+    }
 
-        return null;
+    protected List<URL> getCacheUrls(URL url) {
+        Map<String, List<URL>> rsUrls = subscribedCategoryResponse.get(url);
+        if (rsUrls == null || rsUrls.isEmpty()) {
+            return null;
+        }
+
+        List<URL> urls = Lists.newArrayList();
+        for (List<URL> us : rsUrls.values()) {
+            for (URL tempUrl : us) {
+                urls.add(tempUrl.copy());
+            }
+        }
+
+        return urls;
+    }
+
+    protected void notify(URL refUrl, NotifyListener listener, List<URL> urls) {
+        if (listener == null || urls == null) {
+            return;
+        }
+        Map<String, List<URL>> nodeTypeUrlsInRs = Maps.newHashMap();
+        for (URL surl : urls) {
+            String nodeType = surl.getParameter(URLParamType.nodeType.getName(), URLParamType.nodeType.getValue());
+            List<URL> oneNodeTypeUrls = nodeTypeUrlsInRs.get(nodeType);
+            if (oneNodeTypeUrls == null) {
+                nodeTypeUrlsInRs.put(nodeType, Lists.newArrayList());
+                oneNodeTypeUrls = nodeTypeUrlsInRs.get(nodeType);
+            }
+            oneNodeTypeUrls.add(surl);
+        }
+
+        Map<String, List<URL>> curls = subscribedCategoryResponse.get(refUrl);
+        if (curls == null) {
+            subscribedCategoryResponse.putIfAbsent(refUrl, Maps.newConcurrentMap());
+            curls = subscribedCategoryResponse.get(refUrl);
+        }
+
+        curls.putAll(nodeTypeUrlsInRs);
+
+        for (List<URL> us : nodeTypeUrlsInRs.values()) {
+            listener.notify(getUrl(), us);
+        }
     }
 
     protected abstract void doRegister(URL url);
@@ -147,6 +205,8 @@ public abstract class AbstractRegister implements Register {
     protected abstract void doAvailable(URL url);
 
     protected abstract void doUnavailable(URL url);
+
+    protected abstract List<URL> doDiscover(URL url);
 
 
 }

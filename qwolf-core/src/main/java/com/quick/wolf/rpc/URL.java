@@ -287,4 +287,25 @@ public class URL {
     }
 
 
+    public String getServerPortStr() {
+        return buildHostPortStr(host, port);
+    }
+
+    private static String buildHostPortStr(String host, int defaultPort) {
+        if (defaultPort <= 0) {
+            return host;
+        }
+
+        int idx = host.indexOf(":");
+        if (idx < 0) {
+            return host + ":" + defaultPort;
+        }
+
+        int port = Integer.parseInt(host.substring(idx + 1));
+        if (port <= 0) {
+            return host.substring(0, idx + 1) + defaultPort;
+        }
+        return host;
+    }
+
 }

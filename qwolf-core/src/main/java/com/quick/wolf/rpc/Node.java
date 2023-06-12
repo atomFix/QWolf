@@ -9,7 +9,7 @@ public interface Node {
 
     void init();
 
-    void destory();
+    void destroy();
 
     boolean isAvailable();
 

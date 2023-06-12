@@ -87,7 +87,7 @@ public abstract class AbstractProvider<T> implements Provider<T> {
     }
 
     @Override
-    public void destory() {
+    public void destroy() {
         this.alive = false;
         this.close = true;
     }
